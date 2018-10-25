@@ -1,0 +1,13 @@
+
+Problems to connecting the DB:
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient
+
+
+
+From NET:
+HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient\"SearchList"="domain1,domain2,domain3"
+
+and
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows NT\DNSClient\"SearchList"="domain1,domain2,domain3"
