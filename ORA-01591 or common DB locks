@@ -1,0 +1,12 @@
+SELECT LOCAL_TRAN_ID, GLOBAL_TRAN_ID,STATE,
+'EXECUTE DBMS_TRANSACTION.PURGE_LOST_DB_ENTRY('||''''||LOCAL_TRAN_ID||''''||');'||chr(13)||'COMMIT;'
+FROM DBA_2PC_PENDING
+ORDER BY 1 ASC;
+
+
+
+SELECT *
+FROM v$sqltext a,
+v$session b
+WHERE a.address = b.sql_address
+AND a.hash_value = b.sql_hash_value
