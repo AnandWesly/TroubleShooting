@@ -1,0 +1,41 @@
+
+select 
+   stat.sql_id,  
+   plan_hash_value, 
+   rpad(parsing_schema_name,10) "schema",elapsed_time_total/1000000 "seconds",   
+   elapsed_time_delta,disk_reads_delta,
+   stat.executions_total,
+   to_char(ss.end_interval_time,'dd-mm-yy hh24:mi:ss') "endtime",  
+   rpad(sql_text,40) text,ss.snap_id
+from 
+   dba_hist_sqlstat  stat, 
+   dba_hist_sqltext  txt, 
+   dba_hist_snapshot ss
+where 
+   stat.sql_id = txt.sql_id 
+and 
+   stat.dbid = txt.dbid 
+and 
+   ss.dbid = stat.dbid 
+and 
+   ss.instance_number = stat.instance_number 
+and 
+   stat.snap_id = ss.snap_id 
+and 
+   parsing_schema_name not like 'sys%'  
+and 
+   ss.begin_interval_time >= sysdate-1 
+and 
+   stat.elapsed_time_total/1000000 > 20 
+order by 
+   elapsed_time_total desc;
+   
+then you can use this one to check the explain plan
+
+select * from table(dbms_xplan.display_awr('<PASTE QUERY_ID HERE>',null,null,'ALL'));
+
+
+1.How to do scp 
+scp *.jar weblogic@colkfx28rbapp3:/app/weblogic/webapps/CKI/lib/
+
+
