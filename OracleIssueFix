@@ -1,0 +1,9 @@
+Issue 1:
+Error report -
+ORA-00054: resource busy and acquire with NOWAIT specified or timeout expired
+00054. 00000 -  "resource busy and acquire with NOWAIT specified or timeout expired"
+*Cause:    Interested resource is busy.
+*Action:   Retry if necessary or increase timeout.
+
+Cause: It could be due to the timeout
+Solution: ALTER SESSION SET ddl_lock_timeout=900;
